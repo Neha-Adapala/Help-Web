@@ -3,10 +3,6 @@ import time
 import os
 import HandTrackingModule as htm
 from playsound import playsound
-import smtplib
-import smtplib, ssl
-import imghdr
-from email.message import EmailMessage
 
 wCam, hCam = 1280,960
 
@@ -57,6 +53,8 @@ while True:
          totalFingers = fingers.count(1)
          print(totalFingers)
 
+
+
          h, w, c = overlayList[totalFingers - 1].shape
          img[0:h, 0:w] = overlayList[totalFingers - 1]
 
@@ -67,19 +65,20 @@ while True:
          if totalFingers == 1:
              cv2.rectangle(img, (270,150), (900, 10), (0, 255, 0), cv2.FILLED)
              cv2.putText(img, 'send location', (300, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 3)
-         if 1< totalFingers == 2:
+         if totalFingers == 2:
              cv2.rectangle(img, (270,150), (900, 10), (0, 255, 0), cv2.FILLED)
              cv2.putText(img, 'message/call contacts', (300, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 3)
-         if 2< totalFingers == 3:
+         if totalFingers == 3:
              cv2.rectangle(img, (270,150), (900, 10), (0, 255, 0), cv2.FILLED)
-             cv2.putText(img, 'sound off alarm', (300, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 3)
+             cv2.putText(img, 'Call police', (300, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 3)
+         if totalFingers == 4:
              playsound('./ALARM1.wav')
-         if 3< totalFingers == 4:
-             cv2.rectangle(img, (270,150), (900, 10), (0, 255, 0), cv2.FILLED)
-             cv2.putText(img, 'call police', (300, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 3)
-         if 4< totalFingers == 5:
+             cv2.rectangle(img, (270, 150), (900, 10), (0, 255, 0), cv2.FILLED)
+             cv2.putText(img, 'sound off alarm', (300, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 3)
+         if totalFingers == 5:
              cv2.rectangle(img, (270,150), (900, 10), (0, 255, 0), cv2.FILLED)
              cv2.putText(img, 'All of the above', (300, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 3)
+
 
 
    cTime = time.time()
